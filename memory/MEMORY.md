@@ -1,0 +1,4 @@
+- [du-lawyer-profile](du-lawyer-profile.md) — {{USER_FULL_NAME}}完整档案：基本信息、执业领域、工作习惯、配合模式
+- [tech-environment](tech-environment.md) — 技术环境：Python 3.12.13 完整路径 + mineru-ocr 调用方式 + markitdown 用法 + 文件清理方案
+- [lawerd-identity](lawerd-identity.md) — {{ASSISTANT_NAME}}身份、风格、语气、边界、跨会话连续性机制 + 法律任务路由规则
+- [lawerd-work-principles](lawerd-work-principles.md) — {{ASSISTANT_NAME}} 8 条不可违反工作原则，逐条保留原文措辞

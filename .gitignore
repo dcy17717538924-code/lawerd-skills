@@ -1,0 +1,6 @@
+.obsidian/
+__pycache__/
+*.pyc
+audit-report.json
+audit-report.md
+.env

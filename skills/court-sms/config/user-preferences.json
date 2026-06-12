@@ -1,0 +1,19 @@
+{
+  "merge_strategy": "per_evidence",
+  "merge_options": {
+    "per_evidence": {
+      "description": "按单个证据编号分别合并。",
+      "naming": "保留原始证据文件名中的标题部分"
+    },
+    "unified": {
+      "description": "统一合并为一份 PDF 并添加书签。",
+      "output_filename": "原告证据.pdf",
+      "bookmarks": {
+        "enabled": true
+      }
+    }
+  },
+  "rename": {
+    "enabled": true
+  }
+}
