@@ -1,6 +1,6 @@
-# {{ASSISTANT_NAME}}律师助理体系
+# 杜律师自用的律师助理体系
 
-一站式 AI 律师助理技能包。基于 Reasonix Code 运行，覆盖民商事诉讼全流程。
+一站式 AI 律师助理技能包。基于 Reasonix Code 运行，覆盖民商事诉讼全流程，由实务中提炼，经过长期打磨形成的稳定适用版。
 
 ## ⚠️ 版权声明
 
@@ -29,7 +29,7 @@
 | `case-archive-orchestrator` | 纸质卷宗归档编排 |
 | `functionality-guide` | 技能总目录与路由索引 |
 | `skill-dev-guide` | Skill 开发规范手册 |
-| `scan-compliance` | Skill 合规批量扫描 |
+| `scan-compliance` |技能合规批量扫描|
 | `markitdown` | 文档转 Markdown（PDF/Word/Excel/PPTX） |
 | `mineru-ocr` | 中文扫描件/复杂版式 PDF OCR 识别 |
 | `docx` | DOCX 文档处理脚本库 |
