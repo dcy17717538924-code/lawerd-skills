@@ -13,7 +13,7 @@
 
 ## 执行
 
-1. 加载 `错误经验.md`，注入上下文避免重复踩坑
+1. 加载 `errors.md`，注入上下文避免重复踩坑
 2. 委托 `run_skill("court-sms")` 完整执行。court-sms 内部含：
    - 输入解析：识别短信类型、提取案号/当事人/下载链接
    - 确定归档目录：案件管理 `{当事人}/` 目录
@@ -25,9 +25,9 @@
 
 | 下载的文书类型 | 衔接动作 | 路由目标 |
 |-------------|---------|---------|
-| 判决书 / 裁定书 | "是否需要我对该判决/裁定进行分析？（上诉策略/履行评估/申请执行）" | `read_file("memory/project/case-management/新案件办理/index.md")` |
+| 判决书 / 裁定书 | "是否需要我对该判决/裁定进行分析？（上诉策略/履行评估/申请执行）" | `read_file("memory/project/case-management/new-case/index.md")` |
 | 传票（开庭通知） | "是否需要我协助庭前准备？（证据梳理/攻防演练/庭审模拟）" | `run_skill("legal-evidence-mapping-mctmilk")` 或 `run_skill("legal-debate-simulation-mctmilk")` |
-| 起诉状 / 上诉状（对方） | "是否需要我分析对方主张并准备答辩策略？" | `read_file("memory/project/case-management/新案件办理/index.md")` |
+| 起诉状 / 上诉状（对方） | "是否需要我分析对方主张并准备答辩策略？" | `read_file("memory/project/case-management/new-case/index.md")` |
 | 举证通知书 | "是否需要我按举证通知梳理证据清单？" | `run_skill("legal-evidence-mapping-mctmilk")` |
 | 其他文书 | "是否需要我对该文书进行法律分析？" | 按文书类型路由 |
 | 多种文书混合 | 逐项列出，让律师选择优先处理哪份 | 按选择路由 |
@@ -43,8 +43,8 @@
 
 ## 参考
 
-- 路由表：[[memory/project/case-management/通用/路由表]]
-- 错误处理：[[memory/project/case-management/通用/错误处理总则]]
+- 路由表：[[memory/project/case-management/common/routing]]
+- 错误处理：[[memory/project/case-management/common/errors]]
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

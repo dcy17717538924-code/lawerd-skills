@@ -4,3 +4,4 @@ __pycache__/
 audit-report.json
 audit-report.md
 .env
+.reasonix/

@@ -21,9 +21,9 @@
 
 ## 参考
 
-- 路由表：[[memory/project/case-management/通用/路由表]]
-- Hooks 规则：[[memory/project/case-management/通用/hooks参考]]
-- 错误处理：[[memory/project/case-management/通用/错误处理总则]]
+- 路由表：[[memory/project/case-management/common/routing]]
+- Hooks 规则：[[memory/project/case-management/common/hooks]]
+- 错误处理：[[memory/project/case-management/common/errors]]
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

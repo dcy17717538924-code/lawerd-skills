@@ -5,21 +5,21 @@
 | 用户意图 | 路由目标 | 说明 |
 |---------|---------|------|
 | 提供文件/图片/PDF（无明确意图） | 追问确认意图后路由 | 先 `run_skill("markitdown")` / LLM 多模态预处理，再确认意图 |
-| "看看材料"、"处理这个案子"、提供完整案情 | `read_file("memory/project/case-management/新案件办理/index.md")` | 有完整材料，需全流程处理 |
-| "接着某某案"、提及已有归档案件 | `read_file("memory/project/case-management/老案件跟进/index.md")` | 已有案件进展记录 |
+| "看看材料"、"处理这个案子"、提供完整案情 | `read_file("memory/project/case-management/new-case/index.md")` | 有完整材料，需全流程处理 |
+| "接着某某案"、提及已有归档案件 | `read_file("memory/project/case-management/followup/index.md")` | 已有案件进展记录 |
 | "这个问题怎么看"、"是否构成 XX"、具体法条问题 | `run_skill("process-cases")` | 具体法律问题，简易模式处理 |
-| "起草一份诉状/答辩状/代理词…" | 新案件办理 step-03，跳过分析步骤 | 直接起草，已有明确策略 |
+| "起草一份诉状/答辩状/代理词…" | new-case step-03，跳过分析步骤 | 直接起草，已有明确策略 |
 | "理一下证据"、"证据分析"、"证据目录" | `run_skill("legal-evidence-mapping-mctmilk")` | 证据梳理与分析 |
 | "先搁置/归档" | `run_skill("case-progress-archive")` | 阶段性归档 |
-| 收到法院短信、粘贴短信内容/送达链接 | `read_file("memory/project/case-management/短信助手/index.md")` | 法院短信→文书下载→归档 |
+| 收到法院短信、粘贴短信内容/送达链接 | `read_file("memory/project/case-management/sms/index.md")` | 法院短信→文书下载→归档 |
 | "审一下这份合同"、"帮我看看这个合同" | `run_skill("contract-review-pro")` | 合同审核七步工作流 |
 | "模拟一下庭审"、"攻防演练"、"沙盘推演" | `run_skill("legal-debate-simulation-mctmilk")` | 对方律师视角五维攻击 |
 | "法官视角"、"庭审压力测试"、"模拟审查" | `run_skill("mock-trial-review")` | 严苛裁判者极限施压 |
 | "写一份案例分析报告"、"复盘这个案子" | `run_skill("case-study-report")` | 专业案例研究报告 |
 | "调口卡去哪"、"工商内档在哪查"、"怎么申请XX" | `run_skill("practice-guide")` | 办案实操指南 |
 | 其他非案件类请求（知识整理/经验记录等） | 放行不阻塞 | 由对应 skill description 正常触发 |
-| 纸质卷宗订卷归档 | `read_file("memory/project/case-management/归档助手/index.md")` | 结案后物理卷宗整理 |
-| 操作案件云（查询/更新/排期） | `read_file("memory/project/case-management/案件云助手/index.md")` | 案件云操作 |
+| 纸质卷宗订卷归档 | `read_file("memory/project/case-management/archive/index.md")` | 结案后物理卷宗整理 |
+| 操作案件云（查询/更新/排期） | `read_file("memory/project/case-management/casecloud/index.md")` | 案件云操作 |
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

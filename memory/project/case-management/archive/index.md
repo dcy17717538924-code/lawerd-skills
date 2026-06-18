@@ -14,7 +14,7 @@
 
 ## 执行
 
-1. 加载 `错误经验.md`，注入上下文避免重复踩坑
+1. 加载 `errors.md`，注入上下文避免重复踩坑
 2. 委托 `run_skill("case-archive-orchestrator")` 完整执行。case-archive-orchestrator 内部含：
    - 在案件根目录建 `00-定卷/` 子目录
    - 按律所 7 大类（诉讼）/ 3 大类（非诉）归类入卷材料
@@ -30,8 +30,8 @@
 
 ## 参考
 
-- 路由表：[[memory/project/case-management/通用/路由表]]
-- 错误处理：[[memory/project/case-management/通用/错误处理总则]]
+- 路由表：[[memory/project/case-management/common/routing]]
+- 错误处理：[[memory/project/case-management/common/errors]]
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

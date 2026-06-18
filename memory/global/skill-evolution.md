@@ -47,7 +47,7 @@ priority: high
 
 ## 升级项存放
 
-确认提炼的升级项写入 `skill-evolution-references/待升级.md`：
+确认提炼的升级项写入 `skill-evolution-references/upgrade-queue.md`：
 
 | 日期 | 类型 | 信号摘要 | 决策来源 | 评估方向 | 是否已融合 |
 |------|------|---------|---------|---------|----------|
@@ -69,7 +69,7 @@ priority: high
 
 每周或会话结束时扫一眼：
 - `memory search type=feedback` → 信号计数
-- `skill-evolution-references/待升级.md` → 未融合的升级项
+- `skill-evolution-references/upgrade-queue.md` → 未融合的升级项
 - 决定下一个升级周期处理哪些
 
 ## 参考

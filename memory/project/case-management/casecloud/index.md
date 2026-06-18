@@ -13,7 +13,7 @@
 
 ## 执行
 
-1. 加载 `错误经验.md`，注入上下文避免重复踩坑
+1. 加载 `errors.md`，注入上下文避免重复踩坑
 2. 识别律师意图，提取对应操作参数：
    - 查询案件列表 → 参数：当事人名称 / 案由 / 案号
    - 查询案件详情 → 参数：案号
@@ -30,8 +30,8 @@
 
 ## 参考
 
-- 路由表：[[memory/project/case-management/通用/路由表]]
-- 错误处理：[[memory/project/case-management/通用/错误处理总则]]
+- 路由表：[[memory/project/case-management/common/routing]]
+- 错误处理：[[memory/project/case-management/common/errors]]
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

@@ -20,11 +20,11 @@
 
 ## 执行
 
-本步骤引用新案件办理的 step-03→04→05 标准线，不重复写：
+本步骤引用 new-case 的 step-03→04→05 标准线，不重复写：
 
-1. 起草文件：执行新案件办理 `step-03-起草文件.md`，`run_skill("draft-legal-docs")`
-2. 定稿交付：执行新案件办理 `step-04-定稿交付.md`，展示→修改→DOCX 生成
-3. 归档：执行新案件办理 `step-05-归档.md`，`run_skill("case-progress-archive")`
+1. 起草文件：执行 new-case `step-03-起草文件.md`，`run_skill("draft-legal-docs")`
+2. 定稿交付：执行 new-case `step-04-定稿交付.md`，展示→修改→DOCX 生成
+3. 归档：执行 new-case `step-05-归档.md`，`run_skill("case-progress-archive")`
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）

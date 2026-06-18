@@ -11,7 +11,7 @@
 |------|------|------------------|
 | 01 | 加载历史 | `IF` 日志存在 `THEN` 加载案件背景 `ELSE` 基于当前材料+对话上下文继续 |
 | 02 | 分析新材 | 策略五要素分析 |
-| 03 | 起草归档 | 引用新案件办理 step-03→04→05 |
+| 03 | 起草归档 | 引用 new-case step-03→04→05 |
 
 ## 前置条件
 
@@ -20,9 +20,9 @@
 
 ## 参考
 
-- 路由表：[[memory/project/case-management/通用/路由表]]
-- Hooks 规则：[[memory/project/case-management/通用/hooks参考]]
-- 错误处理：[[memory/project/case-management/通用/错误处理总则]]
+- 路由表：[[memory/project/case-management/common/routing]]
+- Hooks 规则：[[memory/project/case-management/common/hooks]]
+- 错误处理：[[memory/project/case-management/common/errors]]
 
 --
 - 作者：{{USER_FULL_NAME}}（微信{{USER_WECHAT}}）
