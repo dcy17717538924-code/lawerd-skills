@@ -1,8 +1,5 @@
 ---
 name: case-archive-orchestrator
-author: 杜重阳律师（微信Dcylawer8888)
-version: 1.1.0
-license: MIT
 description: >
   纸质卷宗归档一站式编排。案件结案后，按律所 7 大类（诉讼）/ 3 大类（非诉）归类入卷材料，自动复制并按命名规范改名，最后用律所原版模板生成案卷目录.docx 和办案小结（草稿）.docx（1:1 格式）。
   触发：用户说"归档吧"、"结掉了"、"定稿"、"要装订"、"律所总表要填"时，或案件根目录出现"00-定卷/"前戳的新案件目录时主动触发。
@@ -29,13 +26,7 @@ description: >
 - "律所总表要填"
 - 案件根目录出现 `00-定卷/` 前缀的新案件目录（主动检测）
 
-**命令行**：
-```powershell
-python $skill_dir/scripts/scan_required_materials.py -CasePath <案件根>
-python $skill_dir/scripts/fill_templates.py
-python $skill_dir/scripts/fill_closed_case_table.py -CasePath <案件根>
-python $skill_dir/scripts/export_print_pdf.py -CasePath <案件根>
-```
+**命令行**：见 `steps/step-05-生成定卷文件.md`
 
 **入口参数**：
 - 必填：`-CasePath` 案件根绝对路径（例：`{{CASE_ROOT}}S施玲玲--------离婚`）
@@ -49,10 +40,11 @@ python $skill_dir/scripts/export_print_pdf.py -CasePath <案件根>
 - 立案 / 结案日期（从调解书读）
 - 收案日期（从律师函读）
 
-### Step 2：归类 + 复制（按 3 条用户规则）
+### Step 2：归类 + 复制（按 4 条用户规则）
 
 | 规则 | 说明 |
 |---|---|
+| **0\uFE0F\u20E3 `3-立案提交/` 优先级最高** | 如 `3-立案提交/` 目录存在，所函、委托书、诉状等材料**优先从此目录取**，因该目录是提交法院的正式签章版，准确度最高。立案提交版与诉讼准备版不一致时，以立案提交版为准。 |
 | **1-3 在材料备份文件夹，以图片方式存在** | 大类 1（审理结果）/ 2（委托手续）/ 3（立案材料）优先从 `1-材料备份/` 找 JPG / PNG 图片 |
 | **4-5 在案件目录或司法送达等文件夹** | 大类 4（庭审材料）/ 5（保全材料）在 `2-诉讼准备/` / `3-立案提交/` 找 |
 | **6 是用户自己截图放在案件文件夹** | 大类 6（签收归还）由用户手动放，skill 自动检测；无则提醒 |
@@ -68,15 +60,7 @@ python $skill_dir/scripts/export_print_pdf.py -CasePath <案件根>
 
 ### Step 3：按律所 7 大类（诉讼）归类
 
-```
-1. 审理结果          （民事裁定书 / 调解书 / 判决书）
-2. 委托手续          （授权委托书 / 委托合同 / 律所函）
-3. 立案材料          （起诉状 / 身份信息 / 代理词）
-4. 庭审材料          （合同 / 一审起诉材料 / 证据材料 / 证人申请书 / 开庭备忘录）
-5. 保全材料          （保全材料）
-6. 签收及归还确认单  （《收件回执》/《案件证据材料归还确认单》）
-7. 其他              （法院材料）
-```
+见 `steps/step-03-归类与改名.md`。
 
 ### Step 4：按命名规范改名
 
@@ -121,52 +105,15 @@ python $skill_dir/scripts/export_print_pdf.py -CasePath <案件根>
 
 ## 非诉案件支持（v1.0.0 新增）
 
-非诉案件材料更简单，**3 大类**：
+非诉案件材料更简单，**3 大类**，见 `steps/step-03-归类与改名.md`。
 
-```
-1. 委托手续  （律师合同）
-2. 相关材料  （发票 / 收据 / 付款凭证）
-3. 其他      （散群截图 / 补充材料）
-```
-
-非诉跟诉讼的区别：
-- **不**需要案号 / 法院 / 立案 / 结案日期（没经过法院）
-- **不**有"调解"审理结果（可能"结案" / "撤案" / "和解"）
-- 案卷目录模板**复用诉讼版**（只是材料清单内容不同）
-
-非诉用 `-Type=non-litigation` 参数触发：
-```powershell
-python $skill_dir/scripts/fill_templates.py -CasePath <案件根> -Type non-litigation
-```
+非诉用 `-Type=non-litigation` 参数触发：`steps/step-05-生成定卷文件.md`。
 
 ---
 
 ## 入卷材料 / 目录结构
 
-```
-<案件根>/
-├── 00-定卷/                          ← 本 skill 产出
-│   ├── 案卷目录.docx                  ← 律所原版模板（16KB）
-│   ├── 办案小结（草稿）.docx           ← 律所原版模板（10KB）
-│   ├── 诉讼案件已结案表.xlsx           ← 律所结案总表
-│   ├── 打印版-案卷目录-办案小结-入卷材料.pdf ← 直接打印用合并 PDF
-│   ├── _templates/                    ← 律所模板备份
-│   │   ├── template_catalog.docx
-│   │   └── template_summary.docx
-│   └── 入卷材料/                      ← 平铺，无子目录
-│       ├── 1-1民事调解书_p001.pdf
-│       ├── 2-1律师委托合同_p001.jpg
-│       ├── 2-2律师委托合同_p001.jpg
-│       ├── 3律师发函及律师费.pdf
-│       ├── 4-1立案通知书_p001.pdf
-│       ├── 4-2传票_p001.pdf
-│       ├── 4-3举证通知书_p001.pdf
-│       ├── 5民事调解书_p001.pdf
-│       └── 6散群截图.png
-├── 1-材料备份/                        ← 已存在，不动
-├── 2-诉讼准备/                       ← 已存在，不动
-└── 3-立案提交/                       ← 已存在，不动
-```
+见 `references/directory-structure.md`。
 
 ---
 
@@ -213,3 +160,8 @@ python $skill_dir/scripts/fill_templates.py -CasePath <案件根> -Type non-liti
 | 版本 | 日期 | 更新内容 |
 |---|---|---|
 | v1.0.0 | 2026-06-07 | 初版。试点 S 施玲玲离婚案跑通（16KB 案卷目录 + 10KB 办案小结），扩展非诉案件支持（3 大类） |
+
+--
+- 作者：杜重阳律师（微信Dcylawer8888）
+- 版本：1.1.0
+- 许可证：MIT

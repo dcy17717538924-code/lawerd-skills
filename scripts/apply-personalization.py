@@ -4,14 +4,17 @@
 读取 personalization.yaml，遍历 skills/ 和 memory/ 目录，
 将所有 {{PLACEHOLDER}} 替换为用户实际值。
 
-版权保护黑名单（硬编码，不可通过参数覆盖）：
+署名保护黑名单（硬编码，不可通过参数覆盖）：
 - 跳过 author: 行
 - 跳过 license: 行
 - 跳过 Copyright / © 行
 - 跳过 LICENSE / LICENSE.txt 文件
 
 用法:
-  python3 apply-personalization.py --dict personalization.yaml --skills skills/ --memory memory/
+  python3 apply-personalization.py --dict personalization.yaml --skills skills/ --memory memory/global/
+
+  注意：--memory 指向全局记忆目录（memory/global/）。项目记忆（memory/project/）不通过本脚本处理，
+  安装时由 AG 通过 remember 工具逐条写入。
 """
 
 import argparse
@@ -20,7 +23,7 @@ import re
 import sys
 from pathlib import Path
 
-# ── 版权保护黑名单 ──────────────────────────────────
+# ── 署名保护黑名单 ──────────────────────────────────
 # 这些行/文件在任何情况下都不允许被修改
 
 COPYRIGHT_BLACKLIST_LINES = [
@@ -28,6 +31,8 @@ COPYRIGHT_BLACKLIST_LINES = [
     re.compile(r"^\s*license:", re.IGNORECASE),
     re.compile(r"Copyright", re.IGNORECASE),
     re.compile(r"©"),
+    re.compile(r"作者："),
+    re.compile(r"许可证："),
 ]
 
 COPYRIGHT_BLACKLIST_FILES = {
@@ -121,7 +126,7 @@ def main():
     parser = argparse.ArgumentParser(description="{{ASSISTANT_NAME}}律师助理 — 占位符替换引擎")
     parser.add_argument("--dict", required=True, help="personalization.yaml 路径")
     parser.add_argument("--skills", required=True, help="skills/ 目录路径")
-    parser.add_argument("--memory", required=True, help="memory/ 目录路径")
+    parser.add_argument("--memory", required=True, help="memory/global/ 目录路径（全局记忆）")
     args = parser.parse_args()
 
     # 加载映射表
@@ -157,7 +162,9 @@ def main():
         print(f"  ⚠️  memory/ 目录不存在: {args.memory}")
 
     print()
-    print(f"  ⛔ 版权行 (author/license/Copyright/©) 和 LICENSE 文件已自动跳过，未被修改。")
+    print(f"  ⛔ 署名行 (author/license/Copyright/©) 和 LICENSE 文件已自动跳过，未被修改。")
+    print()
+    print(f"  💡 项目记忆（memory/project/）不通过本脚本部署，安装后由 AG 使用 remember 工具写入。")
     print()
     print("=" * 60)
     print("  替换完成 ✅")

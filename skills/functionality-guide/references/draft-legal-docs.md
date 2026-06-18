@@ -8,6 +8,6 @@
 - 已有分析结论需起草正式法律文书
 - 直接指定文书类型
 
-**不要用于**：案件分析（走 process-cases）、合同起草审核（走 contract-review-pro，需独立安装）
+**不要用于**：案件分析（走 [[process-cases]][[skills/contract-review-pro/SKILL|SKILL]]）、合同起草审核（走 contract-review-pro）
 
 **完整说明**：见 skills/draft-legal-docs/SKILL.md

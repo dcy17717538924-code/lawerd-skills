@@ -30,6 +30,8 @@ REPLACEMENTS = [
      "{{REASONIX_SKILLS}}"),
     (r"D:\\wpsyunpan\\229601413\\WPS云盘\\案件管理\\",
      "{{CASE_ROOT}}"),
+    (r"D:\\wpsyunpan\\229601413\\WPS云盘\\",
+     "{{WPS_ROOT}}"),
     (r"D:\\anzhuang\\Reasonix",
      "{{REASONIX_INSTALL}}"),
     (r"C:\\Users\\13062",
@@ -42,19 +44,24 @@ REPLACEMENTS = [
     ("上海申沪律师事务所", "{{USER_FIRM}}"),
     ("Dcylawer8888", "{{USER_WECHAT}}"),
     
-    # 邮箱/电话（如有）
-    # 这些需要具体匹配
+    # 邮箱/电话/地址 — 通用正则，长的先匹配
+    (r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+     "{{USER_EMAIL}}"),
+    (r"1[3-9]\d{9}",
+     "{{USER_PHONE}}"),
+    (r"(?:收件|邮寄|通讯|联系)\s*地址\s*[：:]\s*\S+",
+     "{{MAIL_ADDRESS}}"),
 ]
 
-# 版权保护：不碰这些行的替换
+# 署名保护：author:/license:/Copyright/© 行 + LICENSE 文件不脱敏（署名不脱敏）
 COPYRIGHT_BLACKLIST = re.compile(
-    r"^\s*(author:|license:|Copyright|©)",
+    r"(?:^\s*(?:author|license):|Copyright|©|作者：|许可证：)",
     re.IGNORECASE
 )
 
 SKIP_FILES = {"LICENSE", "LICENSE.txt", "LICENSE.md"}
 
-EXCLUDE_SKILLS = {"law086", "case-study-report"}
+EXCLUDE_SKILLS = {"law086", "case-study-report", "skill-dev-guide"}
 
 
 def desensitize_file(filepath: str, dstpath: str) -> int:

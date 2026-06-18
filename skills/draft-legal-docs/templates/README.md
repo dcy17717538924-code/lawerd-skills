@@ -1,6 +1,6 @@
 # 模板仓库
 
-> {{USER_SHORT_NAME}}实战验证的 DOCX 文书模板。都经过脱敏处理——具体信息已替换为 `[占位符]`。
+> {{USER_SHORT_NAME}}实战验证的 DOCX 文书模板。都经过脱敏处理——具体信息已替换为 `【占位符】`。WPS CLI `writer replace` 逐项填入。
 
 ## 当前 13 个模板
 
@@ -23,8 +23,8 @@
 ## 使用方式
 
 1. 把新模板 DOCX（含真实信息）丢进此目录
-2. 告诉{{ASSISTANT_NAME}}"处理模板"
-3. {{ASSISTANT_NAME}}跑脱敏脚本 → 生成 `.template.docx`
+2. 告诉粽宝"处理模板"
+3. 粽宝跑脱敏脚本 → 生成 `.template.docx`
 4. 同时提取写法骨架入库 `D:\Agent知识库`
 
 ## 命名规范

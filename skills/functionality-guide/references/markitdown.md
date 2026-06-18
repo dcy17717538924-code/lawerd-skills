@@ -33,7 +33,7 @@ python "{{HOME_WIN}}\.mavis\agents\agent-lawyer-assistant\skills\markitdown\scri
 python "...\markitdown_run.py" "{{CASE_ROOT}}张三--------合同纠纷\" --output "D:\md_output\"
 ```
 
-**在{{ASSISTANT_NAME}}体系中的位置**：
+**在粽宝体系中的位置**：
 - **被调用方**:`workflow-orchestrator` 流程一/二/三的"步骤 0 预处理"
 - **关联 skill**:`process-cases` / `draft-legal-docs` / `case-study-report` 等需要 Markdown 文本输入的下游 skill
 - **关联策略文档**:`agent-lawyer-assistant/skills/workflow-orchestrator/references/format-conversion.md`

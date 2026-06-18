@@ -1,13 +1,12 @@
 # contract-review-pro
 
-> ⚠️ 本 skill 不包含在分发包中，需独立安装。
-
-**作者**：陈石律师（浙江海泰律师事务所）
-
-**获取方式**：
-```bash
-git clone https://github.com/CSlawyer1985/contract-review-pro.git
-```
-然后将 `contract-review-pro/` 放入 `~/.reasonix/skills/`。
-
 **功能**：合同审核，7步工作流+三件套交付（修订稿+批注版+审查报告）
+
+**触发词**：审一下这份合同、合同审查、帮我看看这个合同
+
+**适用场景**：
+- 各类商业合同的专业审核
+
+**不要用于**：非合同类文书审查、法律问题咨询
+
+**完整说明**：见 skills/contract-review-pro/SKILL.md

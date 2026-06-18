@@ -1,10 +1,10 @@
 ---
 name: markitdown
-author: 杜重阳律师（微信Dcylawer8888）
+author: Microsoft
 version: "1.2.0"
 license: MIT
 description: |
-  MarkItDown|文档转Markdown|PDF转Markdown|Word转Markdown|Excel转Markdown|PPTX转Markdown|格式转换|文本提取。Use when用户要求"MarkItDown"、"文档转Markdown"、"PDF转Markdown"、"Word转Markdown"、"Excel转Markdown"、"PPTX转Markdown"、"办公文档格式转换"、"文本提取"。功能：基于 Microsoft 开源 MarkItDown(本地处理无需 API),支持 PDF/DOCX/DOC/PPTX/XLSX/EPUB/HTML/CSV/JSON/ZIP/YouTube/音频 等格式转换为 Markdown,保留表格、标题、列表结构。**本 skill 只做"有文字层文档"提取;扫描件 / 图片 OCR 走{{ASSISTANT_NAME}} IDE 多模态读图,不在本 skill 范围。**
+  MarkItDown|文档转Markdown|PDF转Markdown|Word转Markdown|Excel转Markdown|PPTX转Markdown|格式转换|文本提取。Use when用户要求"MarkItDown"、"文档转Markdown"、"PDF转Markdown"、"Word转Markdown"、"Excel转Markdown"、"PPTX转Markdown"、"办公文档格式转换"、"文本提取"。功能：基于 Microsoft 开源 MarkItDown(本地处理无需 API),支持 PDF/DOCX/DOC/PPTX/XLSX/EPUB/HTML/CSV/JSON/ZIP/YouTube/音频 等格式转换为 Markdown,保留表格、标题、列表结构。**本 skill 只做"有文字层文档"提取;扫描件 / 图片 OCR 走粽宝 IDE 多模态读图,不在本 skill 范围。**
   不要用于:法律分析(走 process-cases)、证据梳理(走 legal-evidence-mapping-mctmilk)、文书起草(走 draft-legal-docs)、扫描件 OCR(走 IDE 多模态读图)。
 ---
 
@@ -13,13 +13,13 @@ description: |
 ## 激活条件
 
 - 律师提供 PDF / Word / PPT / Excel 等**有文字层**材料时
-- 需要把任意文档格式转 Markdown 喂给 process-cases / workflow-orchestrator 时
+- 需要把任意文档格式转 Markdown 喂给 process-cases / case-management 经验库时
 
 ## 不在范围(2026-06-05 明确边界)
 
 | 类型 | 走哪 |
 |---|---|
-| 扫描件 PDF(无文字层) | **{{ASSISTANT_NAME}} IDE 多模态读图** —— {{USER_SHORT_NAME}}把扫描页**直接发图**给我 |
+| 扫描件 PDF(无文字层) | **粽宝 IDE 多模态读图** —— {{USER_SHORT_NAME}}把扫描页**直接发图**给我 |
 | 单张图片 OCR | 同上,直接发图 |
 | 嵌入图片的 PDF / Word(混合型) | markitdown 提文字,嵌入图手动发 |
 | 法律分析 / 文书起草 | 走 process-cases / draft-legal-docs,不走本 skill |
@@ -44,9 +44,9 @@ description: |
 | API Key | 需百度 API Key / MinerU Token | **无需任何 key** |
 | 文档结构 | 纯文本(无表格/标题) | Markdown(完整结构) |
 | 格式覆盖 | 图片 + 扫描件 PDF | **有文字层** PDF + Office + ... |
-| 扫描件 / 图片 OCR | 走百度 / MinerU | **走{{ASSISTANT_NAME}} IDE 多模态**(不归本 skill) |
+| 扫描件 / 图片 OCR | 走百度 / MinerU | **走粽宝 IDE 多模态**(不归本 skill) |
 
-**重构原因**:OCR 方案只解决"图片转文字"一个问题;MarkItDown 一个工具覆盖所有格式,且输出 LLM 友好的 Markdown,直接喂 process-cases / workflow-orchestrator。扫描件 OCR 走 IDE 多模态,链路更短、更稳。
+**重构原因**:OCR 方案只解决"图片转文字"一个问题;MarkItDown 一个工具覆盖所有格式,且输出 LLM 友好的 Markdown,直接喂 process-cases / case-management 经验库。扫描件 OCR 走 IDE 多模态,链路更短、更稳。
 
 ## 安装(用户手动)
 
@@ -113,14 +113,14 @@ print(result.text_content)
 
 > v1.1.0 时代的 `--enable-plugins` / `--llm-*` / `--no-llm` / `--list-plugins` 已在 v1.2.0 移除。脚本不再读 `.env`、不构造 LLM 客户端、不加载 markitdown-ocr 插件。
 
-## 在{{ASSISTANT_NAME}}体系中的位置
+## 在粽宝体系中的位置
 
-- **被调用方**:`workflow-orchestrator` 流程一/二/三的"步骤 0 预处理"
+- **被调用方**:case-management 经验库流程的"步骤 0 预处理"
 - **调用方**:Mavis 律师助理(agent-lawyer-assistant)
 - **关联 skill**:`process-cases` / `draft-legal-docs` / `case-study-report` 等需要 Markdown 文本输入的下游 skill
 - **扫描件分流**:发现无文字层 → 提示{{USER_SHORT_NAME}}改发图,不喂下游,避免空 .md 误导 process-cases
 
-详见 `workflow-orchestrator/references/format-conversion.md`。
+详见 `memory/project/case-management/` 下的经验子文档。
 
 ## 变更历史
 

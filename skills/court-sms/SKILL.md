@@ -1,7 +1,6 @@
 ---
 name: court-sms
 author: 杨卫薪律师（微信 ywxlaw）
-optimizer: 杜重阳律师（微信Dcylawer8888）
 version: "2.1.0-ds"
 license: MIT
 description: 本技能应在用户收到法院12368短信（文书送达、开庭提醒等）时使用，自动提取案号并完成文书下载归档+待办创建。 不要用于：合同审查、法律咨询、普通文件处理。
@@ -287,13 +286,11 @@ if ($LASTEXITCODE -ne 0) { exit 1 }
 
 如一次下载多份文书，逐一解析，汇总为一份报告。
 
-> 深度分析（如判决书解读、合同审查）不在此技能范围内，请使用 [[workflow-orchestrator]]。
+> 深度分析（如判决书解读、合同审查）不在此技能范围内，请使用 case-management 经验库路由。
 
 #### 4.3 上诉期限计算（P1）
 
-当识别到判决书/裁定书时自动计算。
-
-> **⛔ 文书载明期限优先**：解析文书时优先提取正文载明的期限（如"五日内申请复议"、"十五日内上诉"等）。文书有明确期限用文书的，未明确才回退下表通用规则。
+当识别到判决书/裁定书时自动计算：
 
 | 案件类型 | 上诉期限 |
 |---------|---------|
@@ -316,7 +313,7 @@ if ($LASTEXITCODE -ne 0) { exit 1 }
 - 如含判决书/裁定书，⏰ 展示上诉期限信息
 - 如部分失败，列出失败文书和原始链接
 
-> **衔接 [[workflow-orchestrator]]**：汇报完成后，由 orchestrator 接管。根据下载的文书类型（判决书/传票/起诉状等），orchestrator 将主动询问是否需要后续法律分析或庭前准备。详见 workflow-orchestrator `references/flow-03-court-sms.md`。
+> **衔接 case-management 经验库**：汇报完成后，由经验库接管。根据下载的文书类型（判决书/传票/起诉状等），经验库将主动询问是否需要后续法律分析或庭前准备。详见 `memory/project/case-management/短信助手/index.md`。
 
 ---
 

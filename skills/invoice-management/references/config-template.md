@@ -19,9 +19,9 @@
     "password": "IMAP授权码（非邮箱密码）"
   },
   "paths": {
-    "save_dir": "D:\\wpsyunpan\\229601413\\WPS云盘\\01 - 法律工作文件\\报销发票\\未使用",
-    "xlsx_path": "D:\\wpsyunpan\\229601413\\WPS云盘\\01 - 法律工作文件\\报销发票\\发票统计表.xlsx",
-    "work_dir": "D:\\wpsyunpan\\229601413\\WPS云盘\\01 - 法律工作文件\\报销发票"
+    "save_dir": "{{WPS_ROOT}}01 - 法律工作文件\\报销发票\\未使用",
+    "xlsx_path": "{{WPS_ROOT}}01 - 法律工作文件\\报销发票\\发票统计表.xlsx",
+    "work_dir": "{{WPS_ROOT}}01 - 法律工作文件\\报销发票"
   },
   "fetch": {
     "search_keyword": "发票",

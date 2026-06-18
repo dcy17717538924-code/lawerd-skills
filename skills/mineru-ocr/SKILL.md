@@ -5,7 +5,7 @@ description: 通过 MinerU 精准解析 API 把 PDF/Docx/PPT/Excel/扫描件/图
 
 # mineru-ocr — MinerU 精准解析 skill
 
-> {{ASSISTANT_NAME}}自创。用于替代历史 MCP 服务 `mineru-ocr`(已进回收站)。
+> 粽宝自创。用于替代历史 MCP 服务 `mineru-ocr`(已进回收站)。
 > 设计目标:让律师助理在案件流程里**一条命令**完成"扫描件/复杂 PDF → 结构化 Markdown"。
 
 ## 何时用它
@@ -20,7 +20,7 @@ description: 通过 MinerU 精准解析 API 把 PDF/Docx/PPT/Excel/扫描件/图
 
 ## 调用入口(给律师助理)
 
-律师助理在 `workflow-orchestrator` 路由后,可直接调用底层 CLI:
+律师助理由 case-management 经验库路由后,可直接调用底层 CLI:
 
 ```bash
 # 批量解析案件材料目录

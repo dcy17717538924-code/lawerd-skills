@@ -1,5 +1,7 @@
 # MCP 工具服务 — 底层能力供给
 
+> **2026-06-14 更新**:新增 chinese-law-mcp v3.0.0 本地 MCP(法律法规全文检索+核验)。
+>
 > **2026-06-05 更新**:原 baidu-ocr / mineru-ocr MCP 服务已退役(随 OCR 方案整体下线),文档解析由 `markitdown` skill 接管,扫描件/图片走 Mavis 当前 LLM(MiniMax-M3)vision 多模态。
 
 Mavis 体系当前用到的 MCP 工具由 Codex 配置文件管理,无需独立 SKILL.md。本文件仅记录在用工具,退役工具已删。
@@ -62,6 +64,12 @@ Mavis 体系当前用到的 MCP 工具由 Codex 配置文件管理,无需独立 
 
 ---
 
+## 法律法规核验
+
+【待补充】 本地 chinese-law-mcp 方案已于 2026-06-14 移除。待后续补充新的法条核验方案。
+
+---
+
 ## 格式转换选择策略(2026-06-05 更新)
 
 | 场景 | 推荐 | 原因 |
@@ -77,3 +85,6 @@ Mavis 体系当前用到的 MCP 工具由 Codex 配置文件管理,无需独立 
 | 旧 OCR 引擎(baidu/mineru/paddle) | ❌ **已退役**,别用 | 2026-06-05 整体下线 |
 
 **优先级**:`markitdown` 优先 → LLM vision 兜底 → 都不行再告知律师
+
+---
+

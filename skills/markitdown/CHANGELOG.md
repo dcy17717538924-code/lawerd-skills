@@ -55,4 +55,4 @@
 ### 历史背景
 
 - 2026-05-30 ~ 2026-06-04:OCR 方案基于 百度 OCR / MinerU / PaddleOCR 三级引擎,在 `coder/skills/local-ocr/` 下
-- 2026-06-05:{{ASSISTANT_NAME}}体系重构,MarkItDown 一站式替换 OCR + 文档解析,本地处理无需 API
+- 2026-06-05:粽宝体系重构,MarkItDown 一站式替换 OCR + 文档解析,本地处理无需 API

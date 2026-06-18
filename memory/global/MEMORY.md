@@ -1,0 +1,4 @@
+- [du-lawyer-profile](du-lawyer-profile.md) — {{USER_FULL_NAME}}基本档案：个人信息、执业领域、工作习惯、配合模式
+- [tech-environment](tech-environment.md) — 技术环境：Python 路径、whisper 模型路径、文件清理
+- [zongbao-identity](zongbao-identity.md) — 粽宝身份、风格、语气、边界、8 条原则、铁律、跨会话连续性
+- [skill-evolution](skill-evolution.md) — 经验演进引擎：四类信号收集、阈值软Hook、升级项管理、反例黑名单

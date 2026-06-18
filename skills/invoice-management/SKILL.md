@@ -1,8 +1,5 @@
 ---
 name: invoice-management
-author: 杜重阳律师（微信Dcylawer8888）
-version: "1.0.0"
-license: MIT
 description: |
   本技能应在{{USER_SHORT_NAME}}需要管理报销发票时使用：从163邮箱下载发票附件、PDF解析金额与用途分类、归档到未使用目录并更新统计表、按目标金额凑票组合、查库存。
   触发词："拉发票""下载发票""凑发票""凑XX元发票""发票库存""看发票""整理发票"。
@@ -32,20 +29,7 @@ description: |
 
 ## 工作流总览
 
-```
-邮件下载（流程二）
-  ↓ PDF 附件保存到 未使用/
-  ↓ pdfplumber 提取金额 + 用途
-  ↓ 重命名为 "用途+金额.pdf"
-  ↓ openpyxl 追加行到 发票统计表.xlsx
-  ↓
-凑票（流程三）
-  ↓ {{USER_SHORT_NAME}}说 "凑XX元发票"
-  ↓ 从 发票统计表.xlsx 筛选未使用
-  ↓ 贪心算法选取组合覆盖目标金额
-  ↓ 创建 {日期}+{金额}/ 文件夹
-  ↓ move 选中发票 → 更新统计表状态
-```
+工作流总览见 `references/workflow-diagram.md`。
 
 ### 流程一：初始整理
 
@@ -65,13 +49,7 @@ description: |
 
 ## 目录约定
 
-```
-{发票根目录}/
-├── 发票统计表.xlsx          ← 主数据表
-├── 未使用/                  ← 已重命名的可用发票
-├── {YYYY-MM-DD}+{金额}/     ← 某次凑票的已使用发票（流程三创建）
-└── extract_invoices.py      ← 遗留脚本（不再使用）
-```
+见 `references/directory-structure.md`。
 
 ## 命名规则
 
@@ -112,9 +90,7 @@ description: |
 
 凭据存放在 skill 外部，不纳入版本管理：
 
-```
-{发票根目录}\.workbuddy\skills\invoice-management\config\user-config.json
-```
+> `{发票根目录}\.workbuddy\skills\invoice-management\config\user-config.json`
 
 或运行时由{{USER_SHORT_NAME}}提供。需三个字段：
 - `email`：163 邮箱地址
@@ -130,19 +106,17 @@ description: |
 - `openpyxl`：xlsx 读写
 - `imaplib` + `email`：Python 标准库，无需额外安装
 
-首次使用前检查：
-```powershell
-& "{{CODEX_PYTHON}}" -c "import pdfplumber, openpyxl" 2>$null
-```
-若报错：
-```powershell
-& "{{CODEX_PYTHON}}" -m pip install pdfplumber openpyxl
-```
+首次使用前检查及安装命令见 `steps/step-00-依赖检查.md`。
 
 ## 与其他技能配合
 
-本 skill 独立使用，无上下游依赖。不经过 workflow-orchestrator。
+本 skill 独立使用，无上下游依赖。不经 case-management 经验库路由。
 
 ## 变更历史
 
 见 [CHANGELOG.md](./CHANGELOG.md)
+
+--
+- 作者：杜重阳律师（微信Dcylawer8888）
+- 版本：1.0.0
+- 许可证：MIT

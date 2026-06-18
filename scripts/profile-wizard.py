@@ -23,6 +23,7 @@ DEFAULTS = {
     "USER_EMAIL": "",
     "CASE_ROOT": "",
     "ARCHIVE_ROOT": "",
+    "WPS_ROOT": "",
     "MINERU_TOKEN_PATH": "",
 }
 
@@ -73,6 +74,8 @@ def validate():
 
     values["CASE_ROOT"] = ask(f"案件文件存放根目录", case_hint)
     values["ARCHIVE_ROOT"] = ask(f"结案归档根目录", archive_hint)
+    wps_hint = f"{HOME}\\Documents\\WPS云盘\\" if sys.platform == "win32" else f"{HOME}/Documents/WPS云盘/"
+    values["WPS_ROOT"] = ask(f"WPS 云盘根目录", wps_hint)
     print()
     print("── 外部服务 ──")
     mineru_default = f"{HOME}/Desktop/mineru.txt"

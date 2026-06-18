@@ -1,6 +1,6 @@
 # Changelog — mineru-ocr
 
-> {{ASSISTANT_NAME}}自创 skill。全局可用,主 mavis / 律师助理 / 技术顾问都能加载。
+> 粽宝自创 skill。全局可用,主 mavis / 律师助理 / 技术顾问都能加载。
 > 配套: `MEMORY.md` 索引 + `SKILL.md` 入口 + `scripts/mineru_parse.py` CLI。
 
 ## v1.0.0 — 2026-06-08
@@ -23,5 +23,5 @@
 - `.env.example` — token 配置模板
 
 ### 配套
-- 写入 `tech-environment.md` § 五({{ASSISTANT_NAME}}自创 skill 清单 18 → 19)
+- 写入 `tech-environment.md` § 五(粽宝自创 skill 清单 18 → 19)
 - 与 `local-ocr` skill 互补:扫描件/复杂版式走本 skill,纯文本走 markitdown

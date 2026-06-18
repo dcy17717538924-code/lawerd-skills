@@ -1,124 +1,31 @@
 ---
 name: draft-legal-docs
-author: 杜重阳律师（微信Dcylawer8888)
-version: "3.2.0"
-license: MIT
-description: 起草法律文书技能。当用户要求"起草"、"撰写"、"拟一份"、"形成"、"调整"、"改一下"法律文书（如质证意见、辩论提纲、合同、起诉状等）时触发。 不要用于：法律问题分析（走 process-cases 简易模式）、案件全流程处理（走 workflow-orchestrator）。
+description: 起草法律文书。当用户要求"起草""撰写""拟一份""形成""调整""改一下"法律文书（如质证意见、辩论提纲、合同、起诉状等）时触发。不要用于：法律问题分析（用 process-cases）、案件全流程处理（由 case-management 经验库编排）。
 ---
 
-# 起草法律文书流程
+# draft-legal-docs
 
-执行本技能前，务必严格遵守 `WorkStandards` 中的红线与原则。
+> 上游：case-management-index（project memory，auto-injected）
+> 下游：[[skills/docx]]
 
-## 强制流程
+## 步骤
 
-### 步骤0：知识库搜索（自动执行，不打断流程）
-- 收到起草指令后，在追问确认的同时，后台搜索 `D:\Agent知识库`：
-  - 按**文书类型**定位对应子目录
-  - 按**案由关键词**匹配文件名
-  - 读 1-3 篇最接近的既往文书
-- **不等待搜索结果**——搜索和追问并行。参照范文的结构和句式风格生成初稿。
-- 搜索方式：优先用 Obsidian CLI `search`，失败则降级为 `search_content`。
+1. [[steps/step-00-搜索知识库]] — 后台搜索既往文书，参照范文风格
+2. [[steps/step-01-确认文书类型]] — 确定文书类型，匹配模板
+3. [[steps/step-02-信息映射]] — 收集模板填充必需信息，分类追问
+4. [[steps/step-03-生成初稿]] — 填充模板或参照范文生成初稿
+5. [[steps/step-04-定稿导出]] — DOCX 定稿，PDF 格式预览
+6. [[steps/step-05-知识沉淀]] — 对比初稿定稿差异，记录写作习惯
 
-### 步骤1：确认文书类型 + 查模板库
-- 收到指令后首复："收到起草 [文书类型] 的指令。"
-- **模板匹配**：对照 [[template-matching]] 表，确认文书类型是否有对应 `.template.docx`。
-  - **有模板** → 回复："已匹配模板 [模板名]，将按模板填充关键信息。"
-  - **无模板** → 回复："未找到模板，将参照知识库范文自由起草。"
-- 追问确认核心诉求、涉案主体及文书类型。
+## 关联
 
-### 步骤1.5：信息映射（依据 [[placeholder-dictionary]]）
-- **有模板路径**：
-  1. 加载 `.template.docx`，提取所有 `[占位符]`
-  2. 对照 [[placeholder-dictionary]] 分类列出需提供的信息
-  3. ⚡ 必填项 → 硬 Hook 追问律师
-  4. ○ 选填项 → 有默认值自动填，无默认值跳过
-  5. △ 条件项 → 根据案件类型判断是否追问
-- **无模板路径**：
-  1. 从知识库范文提取结构要素
-  2. 用 [[placeholder-dictionary]] 生成追问清单
-  3. 持续追问直至框架清楚
+- [[skills/process-cases]]
+- [[skills/case-progress-archive]]
+- [[skills/docx]]
+- 模板说明：`references/template-matching.md`
+- 占位符字典：`references/placeholder-dictionary.md`
 
-### 步骤2：初稿生成与确认
-- **有模板路径**：占位符反向填充真实信息 → 生成初稿
-- **无模板路径**：参照知识库范文风格自由起草
-- 遵循杜律师风格：简洁利落，当事人信息一段到底，诉讼请求顶格排列，事实与理由一段到底
-- 在对话中直接展示初稿全文。确认后进入步骤3。
-
-### 步骤3：DOCX 定稿（WPS CLI 模板填充 + PDF 预览 + 审阅）
-
-> **核心原则：模板即格式权威。只替换文本，不触碰格式。**
-
-#### 3a. 有模板路径（主路径）
-
-1. **复制模板**到案卷目录：
-   ```
-   copy "C:\Users\13062\.reasonix\skills\draft-legal-docs\templates\[模板名].template.docx" "[案卷目录]\[案件名]-[文书类型]（定稿）.docx"
-   ```
-
-2. **填充模板**——用 `fill_template.py` 直接 OOXML 文本替换（零格式损耗）：
-   ```
-   "{{CODEX_PYTHON}}" scripts/fill_template.py "[模板路径].docx" "[定稿路径].docx" --set "【法院名称】" "上海市浦东新区人民法院" --set "【原告信息】" "..."
-   ```
-   或通过 JSON 数据文件批量填入：
-   ```
-   "{{CODEX_PYTHON}}" scripts/fill_template.py "[模板路径].docx" "[定稿路径].docx" --data "[数据].json"
-   ```
-   - 模板占位符用 `【】` 标注（如 `【原告信息】`、`【诉讼请求】`）
-   - 仅替换 `<w:t>` 内的文本，不动标签、样式、段落结构
-   - 多余占位符替换为空字符串即可
-
-3. **⛔ PDF 预览（强制）**——WPS CLI 导出 PDF 检查排版：
-   ```
-   wps writer export-pdf "[定稿路径].docx"
-   ```
-   检查项：标题字体（黑体/方正小标宋）、正文字体（仿宋）、页边距、落款右对齐位、段间距、表格边框完整性。WPS 原生渲染，所见即所得。发现问题在 WPS 中修正后重新导出。
-
-5. 格式确认后调 Obsidian CLI 打开审阅：
-   ```
-   "D:\anzhuang\Obsidian\obsidian" open path="[文件名]" vault="Agent知识库"
-   ```
-
-#### 3b. 无模板路径（降级）
-
-- 用 python-docx 按「杜律师默认排版配置」（页边距 3.7/3.5/2.8/2.6cm，标题黑体 16pt，正文仿宋 14pt，行距 1.5）生成 DOCX
-- 同样须走步骤 3a 的第 3 步 WPS PDF 预览
-
-#### 3c. XLSX 模板路径（证据目录等）
-
-1. **复制模板**到案卷目录：
-   ```
-   copy "C:\Users\13062\.reasonix\skills\draft-legal-docs\templates\证据目录.template.xlsx" "[案卷目录]\[案件名]-证据目录.xlsx"
-   ```
-
-2. **填充模板**——用 `fill_template_xlsx.py` 通过 openpyxl 替换占位符并动态管理行：
-   ```
-   "{{CODEX_PYTHON}}" scripts/fill_template_xlsx.py "[模板路径].xlsx" "[定稿路径].xlsx" --data "[数据].json"
-   ```
-   或逐项：
-   ```
-   "{{CODEX_PYTHON}}" scripts/fill_template_xlsx.py "[模板路径].xlsx" "[定稿路径].xlsx" --提交人 "原告张三" --日期 "2026-06-15"
-   ```
-
-   JSON 数据中 `证据列表` 每项一行，A+B 合并自动中文编号（一/二/三…），无纵向合并：
-   ```json
-   {"证据列表": [{"名称": "借款合同", "证明目的": "...", "页码": "1-7"}, ...]}
-   ```
-
-3. **预览**——用 WPS 打开确认排版后交付。
-
-#### 核验提示
-
-附：法条核验 / 信息补充 / 格式核验（模板填充保真 + HTML 预览已确认）
-
-### 步骤4：知识沉淀（软 Hook）
-- 定稿交付后，软 Hook 提示："是否需要对比初稿与定稿差异，沉淀到写作习惯？"
-- 律师确认 → 读定稿 → 对比差异 → 写 `D:\Agent知识库\写作习惯\`
-- 律师跳过 → 不阻塞，正常结束（给了模板时按模板样式，未给模板时按「杜律师默认排版配置」）。
-
-
----
-
-## 变更历史
-
-见 [CHANGELOG.md](./CHANGELOG.md)
+--
+- 作者：杜重阳律师（微信Dcylawer8888）
+- 版本：3.3.0
+- 许可证：MIT

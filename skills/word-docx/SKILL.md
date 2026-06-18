@@ -3,12 +3,9 @@ name: Word / DOCX
 slug: word-docx
 homepage: https://clawic.com/skills/word-docx
 description: >
-  Create, inspect, and edit Microsoft Word documents and DOCX files with reliable styles, numbering,
-  tracked changes, tables, sections, and compatibility checks. Use when (1) the task is about Word
-  or `.docx`; (2) the file includes tracked changes, comments, fields, tables, templates, or page
-  layout constraints; (3) the document must survive round-trip editing without formatting drift.
-  不要用于：法律案件分析、文书起草——本技能为 Word 文档处理工具。
-changelog: Tightened the skill around fragile review workflows, reference stability, and layout drift after a stricter external audit.
+  Word 文档创建/编辑/格式转换/定稿输出。
+changelog: >
+  Kept only for reference and comparison.
 metadata: {"clawdbot":{"emoji":"📘","os":["linux","darwin","win32"]}}
 ---
 

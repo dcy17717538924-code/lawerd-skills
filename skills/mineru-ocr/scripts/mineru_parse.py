@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-mineru_parse.py — MinerU 精准解析 API CLI 客户端({{ASSISTANT_NAME}}适配版)
+mineru_parse.py — MinerU 精准解析 API CLI 客户端(粽宝适配版)
 
 接口文档: https://mineru.net/apiManage/docs
 """
@@ -432,7 +432,7 @@ def _add_common(p: argparse.ArgumentParser):
 def main():
     parser = argparse.ArgumentParser(
         prog="mineru_parse.py",
-        description="MinerU 精准解析 CLI({{ASSISTANT_NAME}}适配版)— 批量把 PDF/扫描件/图片转 Markdown",
+        description="MinerU 精准解析 CLI(粽宝适配版)— 批量把 PDF/扫描件/图片转 Markdown",
     )
     sub = parser.add_subparsers(dest="cmd", required=True)
 

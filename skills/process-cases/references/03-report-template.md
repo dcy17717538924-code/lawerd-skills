@@ -43,6 +43,6 @@
 
 ## 报告使用注意
 
-- 报告由{{ASSISTANT_NAME}}生成,**{{USER_SHORT_NAME}}审阅后才生效**("草案"标注在审阅前不得去掉)
+- 报告由粽宝生成,**{{USER_SHORT_NAME}}审阅后才生效**("草案"标注在审阅前不得去掉)
 - 报告内容由 `case-progress-archive` skill 归档到对应案件子目录
 - 报告输出**不完整展开在聊天界面**,避免暴露策略(详见 `references/04-rules-and-prohibitions.md`)

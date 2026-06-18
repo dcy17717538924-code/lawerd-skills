@@ -8,6 +8,6 @@
 - 轻咨询（随口问法律问题）
 - 深度分析（有完整案件材料）
 
-**不要用于**：文书起草（走 draft-legal-docs）、合同审核（走 contract-review-pro，需独立安装）
+**不要用于**：文书起草（走 [[draft-legal-docs]]）、合同审核（走 [[skills/contract-review-pro/SKILL|SKILL]]）
 
 **完整说明**：见 skills/process-cases/SKILL.md

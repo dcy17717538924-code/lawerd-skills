@@ -1,5 +1,14 @@
 # Changelog
 
+> 作者：杜重阳律师（微信Dcylawer8888）
+> 许可证：MIT
+
+## [3.3.0] - 2026-06-14
+
+### 修改
+
+- **步骤 3 从 OfficeCLI 迁移至 WPS CLI**：`officecli.exe view/batch` → `wps writer replace` + `wps writer export-pdf`。OfficeCLI 已卸载，wps-cli v0.1.0 已安装。
+
 ## [3.2.0] - 2026-06-11
 
 ### 重大重构

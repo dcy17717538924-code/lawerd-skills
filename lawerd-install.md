@@ -1,18 +1,15 @@
 ---
 name: lawerd-install
-author: 杜重阳律师（微信Dcylawer8888）
-version: 1.0.0
+version: "3.0.0"
 license: MIT
 description: |-
   {{ASSISTANT_NAME}}律师助理体系一键安装入口。clone GitHub 仓库 → 环境检查 → 个人信息配置 → 部署完成。
-  不要用于：日常法律工作（安装完成后用 workflow-orchestrator）。
+  不要用于：日常法律工作（安装完成后由 case-management-index 自动路由）。
 ---
 
 # {{ASSISTANT_NAME}}律师助理 — 一键安装
 
-## ⚠️ 版权声明
-
-本体系所有 skill 和 memory 文件的作者版权信息（`author` 字段、署名行、LICENSE 文件）**不可修改**。安装脚本自动跳过版权相关行，仅替换用户个性化占位符。
+> **v3.0 — 2026-06-18**：架构大升级。`workflow-orchestrator` 退役，改为 `case-management-index` project memory 自执行路由。渐进式披露（SKILL.md 能力签名 + steps/ 执行体）。经验演进引擎（skill-evolution）迁入全局记忆。
 
 ## 安装流程
 
@@ -21,7 +18,6 @@ description: |-
 ### 第一步：获取安装包
 
 ```bash
-# 克隆仓库到临时目录
 git clone https://github.com/{{REPO_OWNER}}/lawerd-skills.git /tmp/lawerd-skills
 ```
 
@@ -36,12 +32,7 @@ git clone https://github.com/{{REPO_OWNER}}/lawerd-skills.git /tmp/lawerd-skills
 | Windows | `powershell -File /tmp/lawerd-skills/scripts/env-check.ps1` |
 | macOS / Linux | `bash /tmp/lawerd-skills/scripts/env-check.sh` |
 
-自检项：
-
-- Reasonix Code 已安装（`~/.reasonix/` 存在）
-- Python 3 可用
-- Git 可用
-- `~/.reasonix/skills/` 目录存在
+自检项：Reasonix Code 已安装、Python 3 可用、Git 可用、`~/.reasonix/skills/` 目录存在。
 
 脚本输出 ✅/❌ 表格。有 ❌ 的项目，按提示手动处理后重试。
 
@@ -51,12 +42,7 @@ git clone https://github.com/{{REPO_OWNER}}/lawerd-skills.git /tmp/lawerd-skills
 python3 /tmp/lawerd-skills/scripts/profile-wizard.py
 ```
 
-交互式问答收集：
-
-- 律师全名、日常称呼、微信号
-- 律所全称、所在城市
-- 联系电话、电子邮箱
-- 案件文件根目录、结案归档根目录
+交互式问答收集：律师全名、日常称呼、微信号、律所全称、所在城市、联系电话、电子邮箱、案件文件根目录、结案归档根目录、WPS云盘根目录。
 
 填写完成后，自动生成 `~/.reasonix/skills/personalization.yaml`。
 
@@ -77,24 +63,20 @@ python3 /tmp/lawerd-skills/scripts/apply-personalization.py \
 # 合并 skills
 cp -r /tmp/lawerd-skills/skills/* ~/.reasonix/skills/
 
-# 合并 memory
-cp -r /tmp/lawerd-skills/memory/* ~/.reasonix/memory/global/
+# 合并全局记忆
+cp -r /tmp/lawerd-skills/memory/global/* ~/.reasonix/memory/global/
 ```
 
-> macOS 用户注意：确保目标目录存在，不存在则先 `mkdir -p`。
+> 项目记忆（`memory/project/`）不通过 `cp` 部署。安装完成后，AG 自动读取 `memory/project/` 下的文件并通过 `remember` 工具逐条写入项目级记忆。
 
 ### 第六步：验证
 
 ```bash
 # 检查 skill 数量
 ls ~/.reasonix/skills/ | wc -l
-
-# 跑合规扫描
-python3 ~/.reasonix/skills/scan-compliance/scripts/scan-compliance.ps1  # Windows
-# 或手动触发 scan-compliance skill
 ```
 
-预期输出：21 个 skill，全部合规。然后 AG 自己测试触发 `workflow-orchestrator`，确认路由正常。
+预期：所有 skill 就位。然后确认 `case-management-index` 已自动注入全局记忆。
 
 ## 完成
 
@@ -103,22 +85,16 @@ python3 ~/.reasonix/skills/scan-compliance/scripts/scan-compliance.ps1  # Window
 ```
 ✅ {{ASSISTANT_NAME}}律师助理体系安装完成
 
-   已部署 21 个 skill
-   已配置 6 个 memory 文件
+   已部署 20 个 skill
+   已配置 4 个全局记忆文件 + project/case-management/ 经验文档树
    个人信息已注入
 
-   现在起，所有法律工作通过 workflow-orchestrator 进入。
+   现在起，所有法律工作通过 case-management-index（project memory）自动路由。
    AG 会自称"{{ASSISTANT_NAME}}"，以你的律师助理身份工作。
 ```
 
 ## 安装后清理
 
-确认一切正常后：
-
 ```bash
 rm -rf /tmp/lawerd-skills/
 ```
-
-## 变更历史
-
-见仓库 CHANGELOG.md。
