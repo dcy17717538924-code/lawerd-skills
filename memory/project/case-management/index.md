@@ -11,7 +11,6 @@
 | 新案件办理 | `new-case/index.md` | 收到完整案情材料，需全流程分析→起草→归档 | process-cases → draft-legal-docs → case-progress-archive |
 | 老案件跟进 | `followup/index.md` | 已有案件进展日志，收到补充材料 | 同新案件办理 |
 | 短信助手 | `sms/index.md` | 收到法院12368短信（文书送达/开庭提醒） | court-sms |
-| 案件云助手 | `casecloud/index.md` | 需要操作案件云（查询/更新/排期） | law086 |
 | 归档助手 | `archive/index.md` | 案件结案后纸质卷宗订卷归档 | case-archive-orchestrator |
 
 ## 通用参考
