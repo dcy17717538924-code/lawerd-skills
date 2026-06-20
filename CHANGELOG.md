@@ -6,6 +6,23 @@
 
 ---
 
+## 2026-06-20 — 案件云删除 + package-sync 技能
+
+### skills — 新增
+- **package-sync**：技能包同步更新 skill
+  - 将 Reasonix 本地调整同步到 zongbao-skills 仓库并推送到 GitHub
+  - 含完整映射速查表（Reasonix 扁平化 ↔ zongbao-skills 目录结构）
+  - 自动排除案件云/casecloud + 技术工具 skills
+
+### memory — 删除
+- **案件云全部移除**：`casecloud/` 目录，`index.md` 路由表中的案件云条目同步移除
+- **Reasonix 案件管理 workspace 同步修复**：6 个 `case-management-*.md` 中 12 处过期中文文件引用更正
+
+### 项目 — 新增
+- **CHANGELOG.md**：完整更新记录
+
+---
+
 ## 2026-06-19 — Memory 全量 ASCII 化
 
 ### memory — 修复
