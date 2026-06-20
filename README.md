@@ -4,15 +4,38 @@
 
 > **v3.0 — 2026-06-18 架构大升级**：渐进式披露（SKILL.md 能力签名 + steps/ 执行体）、项目记忆经验文档树（5 大功能链路编排 skill）、全局经验演进引擎（四类信号收集→阈值软Hook→升级项管理）。
 
-## ⚠️ 版权声明
-
-**本体系所有 skill 和 memory 文件的作者版权信息（`author` 字段、署名行、LICENSE 文件）不可修改。** 安装脚本会自动跳过版权相关行。MIT 许可证涵盖代码部分，版权署名归属原作者。
-
 ## 3 步上手
 
 1. 把 `lawerd-install.md` 放入 `~/.reasonix/skills/`
 2. 对 AG 说："运行 lawerd-install"
 3. 按提示填写个人信息，AG 自动完成剩余步骤
+
+## 已安装用户更新
+
+### Windows（PowerShell）
+
+```powershell
+iwr -Uri 'https://github.com/dcy17717538924-code/lawerd-skills/archive/refs/heads/master.zip' -OutFile "$env:TEMP\lawerd-skills.zip"
+Expand-Archive "$env:TEMP\lawerd-skills.zip" -DestinationPath "$env:TEMP\lawerd-skills-update" -Force
+$src = "$env:TEMP\lawerd-skills-update\lawerd-skills-master"
+python "$src\scripts\apply-personalization.py" --dict "$env:USERPROFILE\.reasonix\skills\personalization.yaml" --skills "$src\skills\" --memory "$src\memory\global\"
+Copy-Item -Recurse -Force "$src\skills\*" "$env:USERPROFILE\.reasonix\skills\"
+Copy-Item -Recurse -Force "$src\memory\global\*" "$env:USERPROFILE\.reasonix\memory\global\"
+Remove-Item -Recurse -Force "$env:TEMP\lawerd-skills.zip", "$env:TEMP\lawerd-skills-update"
+```
+
+### macOS / Linux（终端）
+
+```bash
+curl -L -o /tmp/lawerd-skills.tar.gz https://github.com/dcy17717538924-code/lawerd-skills/archive/refs/heads/master.tar.gz
+tar -xzf /tmp/lawerd-skills.tar.gz -C /tmp/
+python3 /tmp/lawerd-skills-master/scripts/apply-personalization.py --dict ~/.reasonix/skills/personalization.yaml --skills /tmp/lawerd-skills-master/skills/ --memory /tmp/lawerd-skills-master/memory/global/
+cp -r /tmp/lawerd-skills-master/skills/* ~/.reasonix/skills/
+cp -r /tmp/lawerd-skills-master/memory/global/* ~/.reasonix/memory/global/
+rm -rf /tmp/lawerd-skills.tar.gz /tmp/lawerd-skills-master
+```
+
+> personalization.yaml 不会动，放心。
 
 ## 技能清单（20 + 1 stub）
 
